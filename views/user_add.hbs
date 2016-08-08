@@ -1,37 +1,37 @@
 
 {{> header }}
 
-<h1>New user</h1>
+<h1>Neuer Mitarbeiter</h1>
 
-<p class="lead">Adding new user account</p>
+<p class="lead">Neuen Mitarbeiter hinzufügen</p>
 
 {{> show_flash_messages }}
 
 <form class="form-horizontal" method="POST" action="/users/add/" id="add_new_user_form">
 
   <div class="form-group">
-    <label for="name_inp" class="col-md-2 control-label">First Name</label>
+    <label for="name_inp" class="col-md-2 control-label">Vorname</label>
     <div class="col-md-6">
       <input class="form-control" id="name_inp" placeholder="Employee first name" name="name">
     </div>
   </div>
 
   <div class="form-group">
-    <label for="lastname_inp" class="col-md-2 control-label">Last Name</label>
+    <label for="lastname_inp" class="col-md-2 control-label">Nachname</label>
     <div class="col-md-6">
       <input class="form-control" id="lastname_inp" placeholder="Employee Last Name" name="lastname">
     </div>
   </div>
 
   <div class="form-group">
-    <label for="email_inp" class="col-md-2 control-label">Email Address</label>
+    <label for="email_inp" class="col-md-2 control-label">Email Addresse</label>
     <div class="col-md-6">
       <input class="form-control" id="email_inp" type="email" placeholder="Employee email" name="email">
     </div>
   </div>
 
   <div class="form-group">
-    <label for="select_inp" class="col-md-2 control-label">Department</label>
+    <label for="select_inp" class="col-md-2 control-label">Abteilung</label>
     <div class="col-md-6">
       <select class="form-control" id="select_inp" name="department">
         {{#each company.departments}}
@@ -42,28 +42,28 @@
   </div>
 
   <div class="form-group">
-    <label for="admin_inp" class="col-md-2 control-label">Is administrator user</label>
+    <label for="admin_inp" class="col-md-2 control-label">Administrator?</label>
     <div class="col-md-6">
       <input class="" id="admin_inp" name="admin" type="checkbox">
     </div>
   </div>
 
   <div class="form-group">
-    <label for="start_date_inp" class="col-md-2 control-label">Started on</label>
+    <label for="start_date_inp" class="col-md-2 control-label">Beschäftigt seit</label>
     <div class="col-md-6 date">
       <input class="form-control" id="start_date_inp" type="text" name="start_date" data-date-autoclose="1" data-provide="datepicker" data-date-format="yyyy-mm-dd">
     </div>
   </div>
 
   <div class="form-group">
-    <label for="end_date_inp" class="col-md-2 control-label">Ended on</label>
+    <label for="end_date_inp" class="col-md-2 control-label">Beschäftigt bis</label>
     <div class="col-md-6 date">
       <input class="form-control" id="end_date_inp" type="text" name="end_date" data-date-autoclose="1" data-provide="datepicker" data-date-format="yyyy-mm-dd">
     </div>
   </div>
 
   <div class="form-group">
-    <label for="password_inp" class="col-md-2 control-label">Password</label>
+    <label for="password_inp" class="col-md-2 control-label">Passwort</label>
     <div class="col-md-6 date">
       <input class="form-control" id="password_inp" type="password" name="password" value="" aria-describedby="password_inp_help" {{# if company.ldap_auth_enabled}}readonly{{/if}}>
     </div>
@@ -73,7 +73,7 @@
   </div>
 
   <div class="form-group">
-    <label for="password_inp" class="col-md-2 control-label">Confirm password</label>
+    <label for="password_inp" class="col-md-2 control-label">Password bestätigen</label>
     <div class="col-md-6 date">
       <input class="form-control" id="confirm_password_inp" type="password" name="password_confirm" value="" {{# if company.ldap_auth_enabled}}readonly{{/if}}>
     </div>
@@ -81,7 +81,7 @@
 
   <div class="form-group">
     <div class="col-md-offset-2 col-md-6">
-      <button type="submit" class="btn btn-success">Save changes</button>
+      <button type="submit" class="btn btn-success">Hinzufügen</button>
     </div>
   </div>
 </form>

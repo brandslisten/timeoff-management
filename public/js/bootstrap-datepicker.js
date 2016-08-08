@@ -1657,16 +1657,27 @@
 	];
 	$.fn.datepicker.Constructor = Datepicker;
 	var dates = $.fn.datepicker.dates = {
-		en: {
-			days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-			daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-			daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-			months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-			monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-			today: "Today",
-			clear: "Clear",
-			titleFormat: "MM yyyy"
-		}
+		// en: {
+		// 	days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+		// 	daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+		// 	daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+		// 	months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+		// 	monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		// 	today: "Today",
+		// 	clear: "Clear",
+		// 	titleFormat: "MM yyyy"
+		// },
+    en: {
+      days:["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],
+      daysShort:["Son","Mon","Die","Mit","Don","Fri","Sam"],
+      daysMin:["So","Mo","Di","Mi","Do","Fr","Sa"],
+      months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],
+      monthsShort:["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"],
+      today:"Heute",
+      monthsTitle:"Monat",
+      clear:"Leeren",
+      titleFormat:"MM yyyy"
+    }
 	};
 
 	var DPGlobal = {

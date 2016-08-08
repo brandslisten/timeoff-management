@@ -1,0 +1,7 @@
+apps:
+  - script: app.js
+    name: Brandslisten-Calendar
+    instances: 1
+    exec_mode: fork
+    env:
+      PORT: 8080

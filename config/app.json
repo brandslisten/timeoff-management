@@ -1,13 +1,14 @@
 {
-  "send_emails"              : false,
-  "application_sender_email" : "email@test.com",
+  "send_emails"              : true,
+  "application_sender_email" : "calendar@brandslisten.com",
   "email_transporter" : {
-    "host" : "localhost",
-    "port" : 25,
+    "host" : "mail.wtnet.de",
+    "port" : 465,
+    "secure": true,
     "auth" : {
-      "user" : "user",
-      "pass" : "pass"
+      "user" : "blinternal@wtnet.de",
+      "pass" : "L6Ue!Gwf@68"
     }
   },
-  "crypto_secret" : "!2~`HswpPPLa22+=±§sdq qwe,appp qwwokDF_"
+  "crypto_secret" : "!2~+=±§sdq`HswpPPLa22qwwokDF_qwe,appp"
 }

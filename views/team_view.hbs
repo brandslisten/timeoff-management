@@ -1,7 +1,7 @@
 
 {{> header }}
 
-<h1>Team View</h1>
+<h1>Team Kalendar</h1>
 
 <div class="row">
     <div class="col-md-6 lead">{{logged_user.name}} {{logged_user.lastname}}'s team <a href="/calendar/feeds/" data-toggle="tooltip" data-placement="right" title="Export Team View to external calendars"><span class="fa fa-rss"></span></a></div>
@@ -32,11 +32,11 @@
 
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            {{# if current_department }}{{current_department.name}}{{else}}All departments{{/if}}
+            {{# if current_department }}{{current_department.name}}{{else}}Alle Abteilungen{{/if}}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="?{{> team_view_url_parameters current_department = null }}">All</a></li>
+            <li><a href="?{{> team_view_url_parameters current_department = null }}">Alle</a></li>
             {{#each related_departments}}
             <li><a href="?{{> team_view_url_parameters base_date = ../base_date current_department = this }}">{{this.name}}</a></li>
             {{/each}}
@@ -65,6 +65,17 @@
       </tr>
     {{/each}}
     </table>
+    <p><br />
+    <table>
+      <tr>
+        <td class="current_day_cell col-md-1">&nbsp;</td><td>&nbsp;Aktueller Tag</td>
+        <td class="home_office_cell col-md-1">&nbsp;</td><td>&nbsp;Home Office</td>
+        <td class="offsite_cell col-md-1">&nbsp;</td><td>&nbsp;Offsite</td>
+        <td class="holiday_cell col-md-1">&nbsp;</td><td>&nbsp;Urlaub</td>
+        <td class="ill_cell col-md-1">&nbsp;</td><td>&nbsp;Krank</td>
+      </tr>
+    </table>
+    </p>
   </div>
 </div>
 

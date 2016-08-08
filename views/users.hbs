@@ -1,15 +1,15 @@
 
 {{> header }}
 
-<h1>Staff</h1>
+<h1>Mitarbeiter</h1>
 
 {{> show_flash_messages }}
 
 <div class="row">
-    <div class="col-md-3 lead">{{company.name}}'s staff</div>
+    <div class="col-md-3 lead">{{company.name}}'s Mitarbeiter</div>
     <form id="add_new_user_frm" method="get" action="/users/add/">
         <div class="col-md-3 col-md-offset-6">
-        <button type="submit" class="pull-right btn btn-info" id="add_new_department_btn">Add user</button>
+        <button type="submit" class="pull-right btn btn-info" id="add_new_department_btn">Mitarbeiter hinzufügen</button>
         </div>
     </form>
 </div>
@@ -22,11 +22,11 @@
       <table class="table table-hover all-departments">
         <thead>
           <tr>
-            <th>Departments</th>
+            <th>Abteilungen</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td><a href="/users/">All</a></td></tr>
+          <tr><td><a href="/users/">Alle</a></td></tr>
           {{#each company.departments}}
           <tr><td><a href="/users/?department={{this.id}}">{{this.name}}</a></td></tr>
           {{/each}}
@@ -39,9 +39,9 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>Department</th>
-            <th>Is Administrator?</th>
-            <th>Days used</th>
+            <th>Abteilung</th>
+            <th>Administrator?</th>
+            <th>Genutzte Urlaubstage</th>
           </tr>
         </thead>
         <tbody>

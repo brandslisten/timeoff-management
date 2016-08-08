@@ -2,9 +2,9 @@
 
 {{> header }}
 
-<h1>General settings</h1>
+<h1>Allgemein Einstellungen</h1>
 
-<p class="lead">Account main settings</p>
+<p class="lead">Account Einstellungen</p>
 
 {{> show_flash_messages }}
 
@@ -14,7 +14,7 @@
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Company
+        Unternehmen
       </div>
       <div class="panel-body">
         <div class="row">
@@ -22,13 +22,13 @@
           <div class="col-md-5">
             <form class="form-horizontal" method="POST" action="/settings/company/" id="company_edit_form">
               <div class="form-group">
-                <label for="input_company_name" class="col-md-4 control-label">Company name</label>
+                <label for="input_company_name" class="col-md-4 control-label">Unternehmensname</label>
                 <div class="col-md-8">
-                  <input class="form-control" id="input_company_name" placeholder="Our company name" value="{{company.name}}" name="name">
+                  <input class="form-control" id="input_company_name" placeholder="Unternehmen" value="{{company.name}}" name="name">
                 </div>
               </div>
               <div class="form-group">
-                <label for="input_country" class="col-md-4 control-label">Country</label>
+                <label for="input_country" class="col-md-4 control-label">Land</label>
                 <div class="col-md-8">
                   <select class="form-control" id="input_country" name="country">
                     {{#each countries}}
@@ -41,17 +41,17 @@
                 <div class="col-md-offset-4 col-md-8">
                   <div class="checkbox">
                     <label for="share-all-absences">
-                      <input id="share-all-absences" type="checkbox" name="share_all_absences" {{# if company.share_all_absences }} checked="checked"{{/if}}>Share absences between all employees
+                      <input id="share-all-absences" type="checkbox" name="share_all_absences" {{# if company.share_all_absences }} checked="checked"{{/if}}>Urlaubstage für alle Mitarbeiter sichtbar machen
                     </label>
                     <p>
-                      <em>If enabled all employees can see information about everybody's absences regardless departments.</em>
+                      <em>Wenn aktiviert, kann jeder Mitarbeiter unabhängig der Abteilung die Abwesenheit aller anderen Mitarbeiter einsehen.</em>
                     </p>
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                  <button type="submit" class="btn btn-success pull-right">Save changes</button>
+                  <button type="submit" class="btn btn-success pull-right">Änderungen speichern</button>
                 </div>
               </div>
             </form>
@@ -60,7 +60,7 @@
           <div class="col-md-offset-1 col-md-5">
             <form class="form-horizontal" method="POST" action="/settings/company/export/" id="company_export_form">
               <div class="form-group">
-                <label for="input_country" class="col-md-6 control-label">Export company data</label>
+                <label for="input_country" class="col-md-6 control-label">Daten exportieren</label>
                 <div class="col-md-6">
                   <button type="submit" class="btn btn-success">Download</button>
                 </div>
@@ -83,22 +83,22 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Bank Holidays
+        Feiertage
       </div>
       <div class="panel-body">
         <form id="delete_bankholiday_form" method="post" action="/settings/bankholidays/delete/"></form>
         <form id="update_bankholiday_form" method="post" action="/settings/bankholidays/">
 
         <div class="row">
-          <div class="col-md-6"><label class="control-label">Holiday Name</label></div>
-          <div class="col-md-3"><label class="control-label">Date</label></div>
+          <div class="col-md-6"><label class="control-label">Feiertag</label></div>
+          <div class="col-md-3"><label class="control-label">Datum</label></div>
         </div>
 
         <div class="row">&nbsp;</div>
 
         {{# unless company.bank_holidays.length }}
         <div class="row">
-          <div class="col-md-4">No Bank holiday records</div>
+          <div class="col-md-4">Keine Feiertage definiert.</div>
         </div>
         {{/unless}}
 
@@ -128,11 +128,9 @@
         <div class="row">&nbsp;</div>
 
         <div class="row">
-          <div class="col-md-offset-6 col-md-3">
-            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#add_new_bank_holiday_modal" id="add_new_bank_holiday_btn">Add new</button>
-          </div>
-          <div class="col-md-2">
-            <button type="submit" class="btn btn-success pull-right">Save changes</button>
+          <div class="col-md-12 text-right">
+            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#add_new_bank_holiday_modal" id="add_new_bank_holiday_btn">Neuer Feiertag</button>
+            <button type="submit" class="btn btn-success">Änderung speichern</button>
           </div>
         </div>
 
@@ -147,13 +145,13 @@
     <div class="panel panel-default">
 
       <div class="panel-heading">
-        Leave Types
+        Abwesenheitsgründe
       </div>
 
       <div class="panel-body">
 
         <div class="row">
-          <div class="col-md-6"><label class="control-label">Leave Type Name</label></div>
+          <div class="col-md-6"><label class="control-label">Bezeichnung</label></div>
           <div class="col-md-offset-3 col-md-2"><label class="control-label">Limit</label></div>
         </div>
 
@@ -164,19 +162,19 @@
 
         {{# unless company.leave_types.length }}
         <div class="row">
-          <div class="col-md-4">No Leave type records</div>
+          <div class="col-md-4">Keine Abwesenheitsgründe definiert.</div>
         </div>
         {{/unless}}
 
 
         {{#each company.leave_types}}
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5">
             <input type="text" class="form-control" value="{{name}}" name="name__{{@index}}">
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <input name="use_allowance__{{@index}}" id="use_allowance__{{@index}}" type="checkbox" {{#if use_allowance}}checked="checked"{{/if}}>
-            <label for="use_allowance__{{@index}}" class="control-label">Use allowance</label>
+            <label for="use_allowance__{{@index}}" class="control-label">Urlaubstage?</label>
           </div>
           <div class="col-md-2">
             <input type="number" class="form-control" value="{{limit}}" name="limit__{{@index}}">
@@ -193,11 +191,9 @@
         <div class="row">&nbsp;</div>
 
         <div class="row">
-          <div class="col-md-offset-7 col-md-3">
-            <button class="btn btn-default" data-toggle="modal" data-target="#add_new_leave_type_modal" type="button" id="add_new_leave_type_btn">Add new</button>
-          </div>
-          <div class="col-md-2">
-            <button type="submit" class="btn btn-success pull-right">Save changes</button>
+          <div class="col-md-12 text-right">
+            <button class="btn btn-default" data-toggle="modal" data-target="#add_new_leave_type_modal" type="button" id="add_new_leave_type_btn">Neuer Abwesenheitsgrund</button>
+            <button type="submit" class="btn btn-success">Änderungen speichern</button>
           </div>
         </div>
         </form>
