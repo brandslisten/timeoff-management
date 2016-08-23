@@ -80,11 +80,11 @@ td.leave_cell {
   background: #a0c13c;
   color: #ffffff; }
 
-td.ill_cell {
+td.ill_cell:not(.leave_cell_pended) {
   background: #ed6b05;
   color: #ffffff; }
 
-td.offsite_cell {
+td.offsite_cell:not(.leave_cell_pended) {
   background: #4e3b66;
   color: #ffffff; }
 
@@ -92,11 +92,11 @@ td.leave_cell_pended {
   background: #FFCBA4;
   color: #61686b; }
 
-td.holiday_cell:not(.weekend_cell) {
+td.holiday_cell:not(.weekend_cell):not(.leave_cell_pended) {
   background: #9fbb58;
   color: #ffffff; }
 
-td.home_office_cell:not(.weekend_cell) {
+td.home_office_cell:not(.weekend_cell):not(.leave_cell_pended) {
   background: #0088cc;
   color: #ffffff; }
 
