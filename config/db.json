@@ -1,7 +1,10 @@
 {
   "development": {
-    "dialect": "sqlite",
-    "storage": "./db.development.sqlite"
+    "username": "calendar",
+    "password": "timeoff",
+    "host": "127.0.0.1",
+    "database": "calendar_mavens",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",

@@ -1,6 +1,6 @@
 apps:
   - script: app.js
-    name: Brandslisten-Calendar
+    name: Mavens-Calendar
     instances: 1
     exec_mode: fork
     env:

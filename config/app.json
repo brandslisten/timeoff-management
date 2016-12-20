@@ -1,6 +1,6 @@
 {
   "send_emails"              : true,
-  "application_sender_email" : "calendar@brandslisten.com",
+  "application_sender_email" : "calendar@mavens.de",
   "email_transporter" : {
     "host" : "mail.wtnet.de",
     "port" : 465,
