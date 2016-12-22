@@ -1,5 +1,5 @@
 apps:
-  - script: npm -- start
+  - script: /usr/bin/npm -- start
     name: Mavens-Calendar
     instances: 1
     exec_mode: fork
