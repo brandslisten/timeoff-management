@@ -1,0 +1,9 @@
+apps:
+  - script: npm
+    args: "-- start"
+    name: Brandslisten-Calendar-2018
+    instances: 1
+    exec_mode: fork
+    env:
+      PORT: 8090
+
