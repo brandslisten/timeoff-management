@@ -1,5 +1,12 @@
 {
   "development": {
+    "username": "calendar",
+    "password": "timeoff",
+    "host": "127.0.0.1",
+    "database": "calendar",
+    "dialect": "mysql"
+  },
+  "development_backup": {
     "dialect": "sqlite",
     "storage": "./db.development.sqlite"
   },
@@ -18,3 +25,4 @@
     "dialect": "mysql"
   }
 }
+
