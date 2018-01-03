@@ -3,7 +3,7 @@
     "username": "calendar",
     "password": "timeoff",
     "host": "127.0.0.1",
-    "database": "calendar",
+    "database": "calendar_brandslisten",
     "dialect": "mysql"
   },
   "development_backup": {
