@@ -16,29 +16,27 @@
     {{# if day.is_current_day }}current_day_cell{{/if}}
 ">
 <span
-  {{#unless day.is_ill}}
-    {{#unless day.is_bank_holiday}}
-      {{#unless day.is_weekend}}
-        {{# with  day.leave_obj }}
-          {{#if this }}
-            data-toggle="tooltip"
-            data-placement="top"
-            title="
-              {{#if ../../day.is_current_day}}Today{{/if}}
-              {{#if this.is_new_leave}}New absence waiting approval{{/if}}
-              {{#if this.is_pended_revoke_leave}}Revoked waiting for approval{{/if}}
-              {{#if this.is_approved_leave}}
-                {{#unless this.is_pended_revoke_leave}}
-                  {{# if day.is_holiday }}holiday
-                  {{else if day.is_ill }}sick
-                  {{else if day.is_offsite }}offsite
-                  {{else if day.is_home_office }}home office
-                  {{else }}Approved absence{{/if}}
-                {{/unless}}
-              {{/if}}"
-          {{/if}}
-        {{/with}}
-      {{/unless}}
+  {{#unless day.is_bank_holiday}}
+    {{#unless day.is_weekend}}
+      {{# with  day.leave_obj }}
+        {{#if this }}
+          data-toggle="tooltip"
+          data-placement="top"
+          title="
+            {{#if ../../day.is_current_day}}Today{{/if}}
+            {{#if this.is_new_leave}}New absence waiting approval{{/if}}
+            {{#if this.is_pended_revoke_leave}}Revoked waiting for approval{{/if}}
+            {{#if this.is_approved_leave}}
+              {{#unless this.is_pended_revoke_leave}}
+                {{# if this.is_holiday }}holiday
+                {{else if this.is_ill }}sick
+                {{else if this.is_offsite }}offsite
+                {{else if this.is_home_office }}home office
+                {{else }}Approved absence{{/if}}
+              {{/unless}}
+            {{/if}}"
+        {{/if}}
+      {{/with}}
     {{/unless}}
   {{/unless}}
   {{#if day.is_current_day}}
