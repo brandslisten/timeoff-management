@@ -88,23 +88,39 @@ div.month_container {
   z-index: 10; }
 
 td.current_day_cell {
-  background: #e25440;
-  color: #ffffff; }
+  background: rgba(0, 135, 205, 0.3);
+  color: #000; }
 
 td.weekend_cell {
   background: #F5F7F8; }
 
 td.bank_holiday_cell {
   background: #31B0D5;
-  color: #ffffff; }
+  color: #000; }
 
 td.leave_cell {
-  background: #9fbb58;
+  background: #a0c13c;
+  color: #ffffff; }
+
+td.ill_cell:not(.leave_cell_pended) {
+  background: #ed6b05;
+  color: #ffffff; }
+
+td.offsite_cell:not(.leave_cell_pended) {
+  background: #4e3b66;
   color: #ffffff; }
 
 td.leave_cell_pended {
   background: #FFCBA4;
   color: #61686b; }
+
+td.holiday_cell:not(.weekend_cell):not(.leave_cell_pended) {
+  background: #9fbb58;
+  color: #ffffff; }
+
+td.home_office_cell:not(.weekend_cell):not(.leave_cell_pended) {
+  background: #0088cc;
+  color: #ffffff; }
 
 .modal-dialog {
   max-width: 450px; }

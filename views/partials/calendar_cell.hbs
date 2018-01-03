@@ -9,27 +9,32 @@
             leave_cell
         {{/if}}
     {{/if}}
+    {{# if day.is_holiday }}holiday_cell{{/if}}
+    {{# if day.is_ill }}ill_cell{{/if}}
+    {{# if day.is_offsite }}offsite_cell{{/if}}
+    {{# if day.is_home_office }}home_office_cell{{/if}}
     {{# if day.is_current_day }}current_day_cell{{/if}}
 ">
 <span
-  {{#unless day.is_bank_holiday}}
-    {{#unless day.is_weekend}}
-      {{# with  day.leave_obj }}
-        {{#if this }}
-          data-toggle="tooltip"
-          data-placement="top"
-          title="
-            {{#if ../../day.is_current_day}}Today{{/if}}
-            {{#if this.is_new_leave}}New absence waiting approval{{/if}}
-            {{#if this.is_pended_revoke_leave}}Revoked waiting for approval{{/if}}
-            {{#if this.is_approved_leave}}
-              {{#unless this.is_pended_revoke_leave}}Approved absence{{/unless}}
-            {{/if}}"
-        {{/if}}
-      {{/with}}
+  {{#unless day.is_ill}}
+    {{#unless day.is_bank_holiday}}
+      {{#unless day.is_weekend}}
+        {{# with  day.leave_obj }}
+          {{#if this }}
+            data-toggle="tooltip"
+            data-placement="top"
+            title="
+              {{#if ../../day.is_current_day}}Today{{/if}}
+              {{#if this.is_new_leave}}New absence waiting approval{{/if}}
+              {{#if this.is_pended_revoke_leave}}Revoked waiting for approval{{/if}}
+              {{#if this.is_approved_leave}}
+                {{#unless this.is_pended_revoke_leave}}Approved absence{{/unless}}
+              {{/if}}"
+          {{/if}}
+        {{/with}}
+      {{/unless}}
     {{/unless}}
   {{/unless}}
-
   {{#if day.is_current_day}}
     data-toggle="tooltip"
     data-placement="top"
@@ -54,5 +59,9 @@
             leave_cell
         {{/if}}
     {{/if}}
+    {{# if day.is_holiday }}holiday_cell{{/if}}
+    {{# if day.is_ill }}ill_cell{{/if}}
+    {{# if day.is_offsite }}offsite_cell{{/if}}
+    {{# if day.is_home_office }}home_office_cell{{/if}}
     {{# if day.is_current_day }}current_day_cell{{/if}}
 "></td>
