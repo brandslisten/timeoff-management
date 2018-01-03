@@ -30,10 +30,10 @@
               {{#if this.is_approved_leave}}
                 {{#unless this.is_pended_revoke_leave}}
                   {{# if day.is_holiday }}holiday
-                  {{# else if day.is_ill }}sick
-                  {{# else if day.is_offsite }}offsite
-                  {{# else if day.is_home_office }}home office
-                  {{# else }}Approved absence{{/if}}
+                  {{else if day.is_ill }}sick
+                  {{else if day.is_offsite }}offsite
+                  {{else if day.is_home_office }}home office
+                  {{else }}Approved absence{{/if}}
                 {{/unless}}
               {{/if}}"
           {{/if}}
