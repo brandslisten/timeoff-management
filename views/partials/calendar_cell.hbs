@@ -61,6 +61,12 @@
     title="Sick"
   {{/if}}
 
+  {{#if day.is_home_office}}
+    data-toggle="tooltip"
+    data-placement="top"
+    title="Home office"
+  {{/if}}
+
 >{{day.val}}</span>
 </td>
 <td class="half_2nd day_{{ day.val }}
