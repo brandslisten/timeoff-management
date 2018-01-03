@@ -55,6 +55,12 @@
     title="Holiday"
   {{/if}}
 
+  {{#if day.is_ill}}
+    data-toggle="tooltip"
+    data-placement="top"
+    title="Sick"
+  {{/if}}
+
 >{{day.val}}</span>
 </td>
 <td class="half_2nd day_{{ day.val }}
