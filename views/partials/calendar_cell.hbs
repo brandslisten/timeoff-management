@@ -16,28 +16,23 @@
     {{# if day.is_current_day }}current_day_cell{{/if}}
 ">
 <span
-  {{#unless day.is_bank_holiday}}
-    {{#unless day.is_weekend}}
-      {{# with  day.leave_obj }}
-        {{#if this }}
-          data-toggle="tooltip"
-          data-placement="top"
-          title="
-            {{#if ../../day.is_current_day}}Today{{/if}}
-            {{#if ../../day.is_holiday}}Holiday{{/if}}
-            {{#if this.is_new_leave}}New absence waiting approval{{/if}}
-            {{#if this.is_pended_revoke_leave}}Revoked waiting for approval{{/if}}
-            {{#if this.is_approved_leave}}
-              {{#unless this.is_pended_revoke_leave}}
-                {{# if ../../../day.is_holiday }}Holiday
-                {{else if ../../../day.is_ill }}Sick
-                {{else if ../../../day.is_offsite }}Offsite
-                {{else if ../../../day.is_home_office }}Home office
-                {{else }}Approved absence{{/if}}
-              {{/unless}}
-            {{/if}}"
-        {{/if}}
-      {{/with}}
+  {{#unless (day.is_ill || day.is_holiday) }}
+    {{#unless day.is_bank_holiday}}
+      {{#unless day.is_weekend}}
+        {{# with  day.leave_obj }}
+          {{#if this }}
+            data-toggle="tooltip"
+            data-placement="top"
+            title="
+              {{#if ../../day.is_current_day}}Today{{/if}}
+              {{#if this.is_new_leave}}New absence waiting approval{{/if}}
+              {{#if this.is_pended_revoke_leave}}Revoked waiting for approval{{/if}}
+              {{#if this.is_approved_leave}}
+                {{#unless this.is_pended_revoke_leave}}Approved absence{{/unless}}
+              {{/if}}"
+          {{/if}}
+        {{/with}}
+      {{/unless}}
     {{/unless}}
   {{/unless}}
   {{#if day.is_current_day}}
@@ -50,6 +45,12 @@
     data-toggle="tooltip"
     data-placement="top"
     title="Bank holiday"
+  {{/if}}
+
+  {{#if day.is_holiday}}
+    data-toggle="tooltip"
+    data-placement="top"
+    title="Holiday"
   {{/if}}
 
 >{{day.val}}</span>
