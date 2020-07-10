@@ -1,22 +1,24 @@
 
 'use strict';
 
-var test             = require('selenium-webdriver/testing'),
+const
+    test             = require('selenium-webdriver/testing'),
     By               = require('selenium-webdriver').By,
     expect           = require('chai').expect,
     _                = require('underscore'),
     Promise          = require("bluebird"),
     moment           = require('moment'),
-    login_user_func        = require('../lib/login_with_user'),
-    register_new_user_func = require('../lib/register_new_user'),
-    open_page_func         = require('../lib/open_page'),
-    submit_form_func       = require('../lib/submit_form'),
-    check_elements_func    = require('../lib/check_elements'),
-    check_booking_func     = require('../lib/check_booking_on_calendar'),
+    login_user_func        = require('../../lib/login_with_user'),
+    register_new_user_func = require('../../lib/register_new_user'),
+    open_page_func         = require('../../lib/open_page'),
+    submit_form_func       = require('../../lib/submit_form'),
+    check_elements_func    = require('../../lib/check_elements'),
+    check_booking_func     = require('../../lib/check_booking_on_calendar'),
   leave_type_edit_form_id='#leave_type_edit_form',
   leave_type_new_form_id ='#leave_type_new_form',
-  config                 = require('../lib/config'),
-  application_host       = config.get_application_host();
+  config                 = require('../../lib/config'),
+  application_host       = config.get_application_host(),
+  userStartsAtTheBeginingOfYear = require('../../lib/set_user_to_start_at_the_beginning_of_the_year');
 
 /*
  *  Scenario to go in this test:
@@ -32,16 +34,21 @@ describe('Try to remove used leave type', function(){
 
   this.timeout( config.get_execution_timeout() );
 
-  var driver;
+  var driver, email;
 
   it('Create new company', function(done){
     register_new_user_func({
       application_host : application_host,
     })
     .then(function(data){
-      driver = data.driver;
+      ({driver, email} = data);
       done();
     });
+  });
+
+  it("Ensure user starts at the very beginning of current year", done =>{
+    userStartsAtTheBeginingOfYear({driver, email, year:2015})
+      .then(() => done())
   });
 
   it("Open page with leave types", function(done){
@@ -140,7 +147,7 @@ describe('Try to remove used leave type', function(){
   it("Try to remove newly added leave type and ensure it fails", function(done){
     submit_form_func({
       driver : driver,
-      submit_button_selector : leave_type_edit_form_id+' button[value="0"]',
+      submit_button_selector : leave_type_edit_form_id+' button[data-tom-leave-type-order="remove_0"]',
       message : /Cannot remove leave type: type is in use/,
     })
     .then(function(){ done() });

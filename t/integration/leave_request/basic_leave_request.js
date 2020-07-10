@@ -1,7 +1,7 @@
 
 'use strict';
 
-var test             = require('selenium-webdriver/testing'),
+const test             = require('selenium-webdriver/testing'),
     config           = require('../../lib/config'),
     application_host = config.get_application_host(),
     By               = require('selenium-webdriver').By,
@@ -17,7 +17,9 @@ var test             = require('selenium-webdriver/testing'),
     submit_form_func       = require('../../lib/submit_form'),
     check_elements_func    = require('../../lib/check_elements'),
     check_booking_func     = require('../../lib/check_booking_on_calendar'),
-    add_new_user_func      = require('../../lib/add_new_user');
+    user_info_func         = require('../../lib/user_info'),
+    add_new_user_func      = require('../../lib/add_new_user'),
+    userStartsAtTheBeginingOfYear = require('../../lib/set_user_to_start_at_the_beginning_of_the_year');
 
 
 /*
@@ -262,17 +264,22 @@ describe("Use problematic date with non default date format", function(){
 
   this.timeout( config.get_execution_timeout() );
 
-  var driver;
+  let driver, email, user_id;
 
   it("Register new company with default date to be DD/MM/YY", function(done){
     register_new_user_func({
       application_host    : application_host,
       default_date_format : 'DD/MM/YY',
     })
-    .then(function(data){
-      driver = data.driver;
+    .then((data) => {
+      ({email, driver} = data);
       done();
     });
+  });
+
+  it("Ensure user starts at the very beginning of current year", done =>{
+    userStartsAtTheBeginingOfYear({driver, email, year:2016})
+      .then(() => done())
   });
 
   it("Open calendar page", function(done){
@@ -310,6 +317,68 @@ describe("Use problematic date with non default date format", function(){
       message : /New leave request was added/,
     })
     .then(function(){ done(); });
+  });
+
+  after(function(done){
+    driver.quit().then(function(){ done(); });
+  });
+
+});
+
+describe("Book the very last day of year to be a holiday", function(){
+
+  this.timeout( config.get_execution_timeout() );
+
+  let driver, email;
+
+  it("Register new company", function(done){
+    register_new_user_func({
+      application_host    : application_host,
+    })
+    .then(function(data){
+      ({driver, email} = data);
+      done();
+    });
+  });
+
+  it("Ensure user starts at the very beginning of current year", done =>{
+    userStartsAtTheBeginingOfYear({driver, email, year: 2018})
+      .then(() => done())
+  });
+
+  it("Place new holiday to be the very last day of the year", function(done){
+    driver.findElement(By.css('#book_time_off_btn'))
+      .then(el => el.click())
+      // This is very important line when working with Bootstrap modals!
+      .then(() => driver.sleep(1000))
+      .then(() => submit_form_func({
+        driver      : driver,
+        form_params : [{
+          selector : 'input#from',
+          value : '2018-12-31',
+        },{
+          selector : 'input#to',
+          value : '2018-12-31',
+        }],
+        message : /New leave request was added/,
+      })
+    )
+    .then(() => done());
+  });
+
+  it("Open calendar page and ensure that the very last day of the year is marked as pending", function(done){
+    open_page_func({
+      url    : application_host + 'calendar/?year=2018&show_full_year=1',
+      driver : driver,
+    })
+
+    .then(() => check_booking_func({
+      driver         : driver,
+      full_days      : [moment('2018-12-31')],
+      type           : 'pended',
+    }))
+
+    .then(() => done());
   });
 
   after(function(done){

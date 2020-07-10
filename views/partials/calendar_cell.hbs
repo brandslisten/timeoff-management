@@ -1,5 +1,5 @@
 
-<td class="half_1st day_{{ day.val }}
+<td class="calendar_cell half_1st day_{{ day.val }}
     {{#if day.is_bank_holiday}}bank_holiday_cell{{/if}}
     {{#if day.is_weekend}}weekend_cell{{/if}}
     {{#if day.is_leave_morning }}
@@ -7,6 +7,7 @@
             leave_cell_pended
         {{else}}
             leave_cell
+            {{day.leave_color_class_morning}}
         {{/if}}
     {{/if}}
     {{# if day.is_holiday }}holiday_cell{{/if}}
@@ -16,6 +17,7 @@
     {{# if day.is_current_day }}current_day_cell{{/if}}
 ">
 <span
+<<<<<<< HEAD
   {{#unless day.is_offsite}}
     {{#unless day.is_home_office}}
       {{#unless day.is_holiday}}
@@ -39,6 +41,24 @@
           {{/unless}}
         {{/unless}}
       {{/unless}}
+=======
+  {{#unless day.is_bank_holiday}}
+    {{#unless day.is_weekend}}
+      {{# with  day.leave_obj }}
+        {{#if this }}
+          data-toggle="tooltip"
+          data-placement="top"
+          title="
+            {{~#if ../day.leaveLabel ~}}{{~../day.leaveLabel~}}: {{/if~}}
+            {{~#if ../../day.is_current_day}}Today{{/if~}}
+            {{~#if this.is_new_leave}}New absence waiting approval{{/if~}}
+            {{~#if this.is_pended_revoke_leave}}Revoked waiting for approval{{/if~}}
+            {{~#if this.is_approved_leave~}}
+              {{~#unless this.is_pended_revoke_leave}}Approved absence{{/unless~}}
+            {{~/if}}"
+        {{/if}}
+      {{/with}}
+>>>>>>> upstream/master
     {{/unless}}
   {{/unless}}
   {{#if day.is_current_day}}
@@ -50,7 +70,7 @@
   {{#if day.is_bank_holiday}}
     data-toggle="tooltip"
     data-placement="top"
-    title="Bank holiday"
+    title="Bank holiday: {{day.bank_holiday_name}}"
   {{/if}}
 
   {{#if day.is_holiday}}
@@ -79,7 +99,7 @@
 
 >{{day.val}}</span>
 </td>
-<td class="half_2nd day_{{ day.val }}
+<td class="calendar_cell half_2nd day_{{ day.val }}
     {{#if day.is_bank_holiday}}bank_holiday_cell{{/if}}
     {{#if day.is_weekend}}weekend_cell{{/if}}
     {{#if day.is_leave_afternoon }}
@@ -87,6 +107,7 @@
             leave_cell_pended
         {{else}}
             leave_cell
+            {{day.leave_color_class_afternoon}}
         {{/if}}
     {{/if}}
     {{# if day.is_holiday }}holiday_cell{{/if}}

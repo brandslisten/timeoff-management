@@ -1,17 +1,21 @@
 
 'use strict';
 
-var test                 = require('selenium-webdriver/testing'),
+const
+  test                 = require('selenium-webdriver/testing'),
   By                     = require('selenium-webdriver').By,
   Promise                = require("bluebird"),
+  moment                 = require('moment'),
   expect                 = require('chai').expect,
   register_new_user_func = require('../../lib/register_new_user'),
   open_page_func         = require('../../lib/open_page'),
   submit_form_func       = require('../../lib/submit_form'),
   check_elements_func    = require('../../lib/check_elements'),
   config                 = require('../../lib/config'),
+  user_info_func         = require('../../lib/user_info'),
   application_host       = config.get_application_host(),
-  schedule_form_id       = '#company_schedule_form';
+  schedule_form_id       = '#company_schedule_form',
+  userStartsAtTheBeginingOfYear = require('../../lib/set_user_to_start_at_the_beginning_of_the_year');
 
 /*
  *  Scenario 1:
@@ -172,7 +176,7 @@ describe("Changing default company wide schedule", function(){
   it('... and make sure Wednsday is marked as non-working day', function(done){
     driver
       // We know that 7th of January 2015 is Wednesday
-      .findElement(By.css('table.calendar_month td.day_7'))
+      .findElement(By.css('table.team-view-table td.day_7'))
       .then(function(el){ return el.getAttribute('class'); })
       .then(function(css){
         expect(css).to.match(/\bweekend_cell\b/);
@@ -182,7 +186,7 @@ describe("Changing default company wide schedule", function(){
 
   it('... and ensure Monday is still working day', function(done){
     driver
-      .findElement(By.css('table.calendar_month td.day_5'))
+      .findElement(By.css('table.team-view-table td.day_5'))
       .then(function(el){ return el.getAttribute('class'); })
       .then(function(css){
         expect(css).not.to.match(/\bweekend_cell\b/);
@@ -209,7 +213,7 @@ describe('Leave request reflects shanges in company schedule', function(){
 
   this.timeout( config.get_execution_timeout() );
 
-  var driver;
+  let driver, email_A;
 
   it("Register new company", function(done){
     register_new_user_func({
@@ -217,8 +221,19 @@ describe('Leave request reflects shanges in company schedule', function(){
     })
     .then(function(data){
       driver = data.driver;
+      email_A = data.email;
       done();
     });
+  });
+
+  it("Obtain information about newly added user", (done) => {
+    user_info_func({driver, email:email_A})
+    .then(data => done());
+  });
+
+  it("Ensure user starts at the very beginning of current year", done =>{
+    userStartsAtTheBeginingOfYear({driver, email:email_A, year:2015})
+      .then(() => done())
   });
 
   it("Open Book leave popup window", function(done){

@@ -91,11 +91,11 @@ describe('Case when holidays spans through more then one month and is devided by
 
   it("Open page with bank holidays", function(done){
     open_page_func({
-      url    : application_host + 'settings/general/',
-      driver : driver,
+      driver,
+      url: application_host + 'settings/bankholidays/',
     })
-    .then(function(){done()});
-  })
+    .then(() => done());
+  });
 
   it("Create new bank holiday to be on 2 Aug 2016", function(done){
     driver.findElement(By.css('#add_new_bank_holiday_btn'))
@@ -338,7 +338,7 @@ describe('Case when holidays spans through more then one month and is devided by
       url    : application_host + 'calendar/teamview/?date=2016-08',
       driver : driver,
     })
-    .then(() => driver.findElement(By.css(`tr[data-vpp-user-list-row="${user_id_B}"] td.teamview-deducted-days`)))
+    .then(() => driver.findElement(By.css(`tr[data-vpp-user-list-row="${user_id_B}"] span.teamview-deducted-days`)))
     .then(el => el.getText())
     .then(txt => {
       expect(txt, 'Ensure that system shows 9 days as deducted')
@@ -352,7 +352,7 @@ describe('Case when holidays spans through more then one month and is devided by
       url    : application_host + 'calendar/teamview/?date=2016-07',
       driver : driver,
     })
-    .then(() => driver.findElement(By.css(`tr[data-vpp-user-list-row="${user_id_B}"] td.teamview-deducted-days`)))
+    .then(() => driver.findElement(By.css(`tr[data-vpp-user-list-row="${user_id_B}"] span.teamview-deducted-days`)))
     .then(el => el.getText())
     .then(txt => {
       expect(txt, 'Ensure that system shows 1.5 days as deducted')
@@ -366,7 +366,7 @@ describe('Case when holidays spans through more then one month and is devided by
       url    : application_host + 'calendar/teamview/?date=2016-09',
       driver : driver,
     })
-    .then(() => driver.findElement(By.css(`tr[data-vpp-user-list-row="${user_id_B}"] td.teamview-deducted-days`)))
+    .then(() => driver.findElement(By.css(`tr[data-vpp-user-list-row="${user_id_B}"] span.teamview-deducted-days`)))
     .then(el => el.getText())
     .then(txt => {
       expect(txt, 'Ensure that system shows 2 days as deducted')

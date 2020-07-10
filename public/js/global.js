@@ -88,3 +88,107 @@ $('#add_secondary_supervisers_modal').on('show.bs.modal', function (event) {
     .html('<p class="text-center"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span></p>')
     .load('/settings/departments/available-supervisors/'+department_id+'/');
 });
+
+/*
+ *  Given URL string return its query paramters as object.
+ *
+ *  If URL is not provided location of current page is used.
+ * */
+
+function getUrlVars(url){
+  if ( ! url ) {
+    url = window.location.href;
+  }
+  var vars = {}, hash;
+  var hashes = url.slice( url.indexOf('?') + 1).split('&');
+  for (var i = 0; i < hashes.length; i++) {
+    hash = hashes[i].split('=');
+    vars[hash[0]] = hash[1];
+  }
+  return vars;
+}
+
+/*
+ * Evend that is fired when user change base date (current month) on Team View page.
+ *
+ * */
+
+$(document).ready(function(){
+
+  $('#team_view_month_select_btn')
+    .datepicker()
+    .on('changeDate', function(e) {
+      var url = $(e.currentTarget).data('tom');
+
+      var form = document.createElement("form");
+      form.method = 'GET';
+      form.action = url;
+
+      var url_params = getUrlVars( url );
+      url_params['date'] = e.format('yyyy-mm');
+
+      // Move query parameters into the form
+      $.each( url_params, function(key, val){
+        var inp = document.createElement("input");
+        inp.name = key;
+        inp.value = val;
+        inp.type = 'hidden';
+        form.appendChild(inp);
+      });
+
+      document.body.appendChild(form);
+
+      return form.submit();
+    });
+});
+
+
+$(document).ready(function(){
+
+  $('[data-tom-color-picker] a')
+    .on('click', function(e){
+      e.stopPropagation();
+
+      // Close dropdown
+      $(e.target).closest('.dropdown-menu').dropdown('toggle');
+
+      var new_class_name =  $(e.target).data('tom-color-picker-css-class');
+
+      // Ensure newly selected color is on triggering element
+      $(e.target).closest('[data-tom-color-picker]')
+        .find('button.dropdown-toggle')
+        .attr('class', function(idx, c){ return c.replace(/leave_type_color_\d+/g, '') })
+        .addClass( new_class_name );
+
+      // Capture newly picked up color in hidden input for submission
+      $(e.target).closest('[data-tom-color-picker]')
+        .find('input[type="hidden"]')
+        .attr('value', new_class_name);
+
+      return false;
+    });
+});
+
+$(document).ready(function(){
+  $('.user-details-summary-trigger').popover({
+    title: 'Employee summary',
+    html: true,
+    trigger: 'hover',
+    placement: 'auto',
+    delay: {show: 1000, hide: 10},
+    content: function(){
+      var divId =  "tmp-id-" + $.now();
+      return detailsInPopup($(this).attr('data-user-id'), divId);
+    }
+  });
+
+  function detailsInPopup(userId, divId){
+    $.ajax({
+      url: '/users/summary/'+userId+'/',
+      success: function(response){
+        $('#'+divId).html(response);
+      }
+    });
+    return '<div id="'+ divId +'">Loading...</div>';
+  }
+});

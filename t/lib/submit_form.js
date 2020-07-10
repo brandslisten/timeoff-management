@@ -2,6 +2,7 @@
 
 var webdriver  = require('selenium-webdriver'),
 By             = require('selenium-webdriver').By,
+Key            = require('selenium-webdriver').Key,
 expect         = require('chai').expect,
 _              = require('underscore'),
 Promise        = require("bluebird"),
@@ -30,6 +31,9 @@ var submit_form_func = Promise.promisify( function(args, callback){
       // bu defaul it looks into firts message only
       multi_line_message = args.multi_line_message || false,
 
+      // Indicates if there is a confirmation dialog
+      confirm_dialog = args.confirm_dialog || false,
+
       // CSS selecetor for form submition button
       submit_button_selector = args.submit_button_selector ||'button[type="submit"]';
 
@@ -55,9 +59,24 @@ var submit_form_func = Promise.promisify( function(args, callback){
                             .then(function(el){ return el.click(); });
                       } else if ( test_case.hasOwnProperty('tick')) {
                           return el.click();
+                      } else if (test_case.file) {
+                        return Promise.resolve()
+                          .then(() => el.sendKeys( test_case.value ));
+                      } else if (test_case.hasOwnProperty('dropdown_option')) {
+                        return el.click()
+                          .then(() => driver.findElement(By.css(test_case.dropdown_option)))
+                          .then(dd => dd.click())
                       } else {
+                          // Prevent the browser validations to allow backend validations to occur
+                          if (test_case.change_step) {
+                            driver.executeScript("return arguments[0].step = '0.1'", el);
+                          }
+
                           return el.clear().then(function(){
                               el.sendKeys( test_case.value );
+                              // Tabs to trigger the calendars overlays
+                              // to close so the modal submit button can be clicked
+                              el.sendKeys(Key.TAB)
                           });
                       }
                   });
@@ -65,6 +84,10 @@ var submit_form_func = Promise.promisify( function(args, callback){
       ]);
     });
 
+    // Accept the confirm dialog
+    if (confirm_dialog) {
+      driver.executeScript('window.confirm = function(msg) { return true; }');
+    }
 
     // Submit the form
     driver

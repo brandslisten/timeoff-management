@@ -8,7 +8,8 @@
   },
   "development_backup": {
     "dialect": "sqlite",
-    "storage": "./db.development.sqlite"
+    "storage": "./db.development.sqlite",
+    "logging": false
   },
   "test": {
     "username": "root",

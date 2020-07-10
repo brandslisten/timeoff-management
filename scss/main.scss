@@ -13,6 +13,8 @@ $font-size-bigger : 16px;
 
 $selected-item-background : #F5F7F8;
 
+$leave_cell_font_color : #61686b;
+
 // 5E5E5E
 
 body {
@@ -25,10 +27,21 @@ a {
 }
 
 /*
+  Simple class that makes its content's font size little bit bigger
+ */
+.text-bigger {
+  font-size: $font-size-bigger;
+}
+
+/*
   Add special class to remove default buttom space
 */
 .no-bottom-space {
   margin-bottom: 0px;
+}
+
+.large-bottom-space {
+  margin-bottom: 300px;
 }
 
 /*
@@ -42,6 +55,18 @@ a {
  */
 .form-group .help-block {
   font-style: italic;
+}
+
+/*
+ Make certain progress bars to be taller
+ */
+
+.progress.bigger {
+  height: 38px;
+
+  .progress-bar {
+    line-height: 38px;
+  }
 }
 
 /* Space out content a bit */
@@ -91,13 +116,38 @@ label.label-plain {
 
 /* styling calendar*/
 
+.calendar_month {
+  width : 100%;
+}
+.calendar_month td {
+  text-align: center;
+  padding-top    : 5px;
+  padding-bottom : 5px;
+}
+.calendar_month thead {
+ text-align: center;
+ font-weight: bolder;
+}
+
+
 div.month_container {
     height : 250px;
 }
-.calendar_month {
-    width : 100%;
+
+.team-view-table {
+  width : 100%;
 }
-.calendar_month td {
+.team-view-table td {
+  padding-top    : 5px;
+  padding-bottom : 5px;
+}
+td.team-view-header {
+  height: 43px;
+  text-align: center;
+}
+
+
+td.calendar_cell {
     width          : 15px !important;
     min-width      : 15px !important;
     max-width      : 15px !important;
@@ -106,20 +156,20 @@ div.month_container {
     padding-top    : 5px;
     padding-bottom : 5px;
 }
-.calendar_month td span {
+td.calendar_cell span {
     position   : relative;
-    left       : 10px;
+    left       : 9px;
     top        : -1px;
     display    : block;
     text-align : center;
     z-index : 10;
 }
 td.current_day_cell {
-  background: #e25440;
+  background: #FFCDD2;
   color : #ffffff;
 }
 td.weekend_cell {
-    background: $selected-item-background;
+  background: $selected-item-background;
 }
 td.bank_holiday_cell {
     background : #31B0D5;
@@ -127,21 +177,18 @@ td.bank_holiday_cell {
 }
 td.leave_cell {
     background : #9fbb58;
-    color : #ffffff;
+    color : $leave_cell_font_color;
+  font-weight: bolder;
 }
 td.leave_cell_pended {
   background: #FFCBA4;
-  color: $primary-font-color;
+  color: $leave_cell_font_color;
+  font-weight: bolder;
 }
 .modal-dialog {
     max-width : 450px;
 }
-.team-view-users td {
-  padding-top    : 5px;
-  padding-bottom : 5px;
-
-}
-.team-view-users .left-column-cell {
+.left-column-cell {
   text-overflow: ellipsis;
   /* Cannot avoid specifying width with pixels... */
   width: 165px;
@@ -149,10 +196,6 @@ td.leave_cell_pended {
   overflow: hidden;
   display: inline-block;
 }
-td.team-view-header {
-    height: 43px;
-}
-
 
 .main-row_header {  /* TODO refactore */
   border: none;
@@ -244,3 +287,22 @@ div.feeds-holder {
   font-weight: bolder;
 }
 
+.leave_type_color_1 {
+  background: #96c521 !important;
+}
+
+.leave_type_color_2 {
+  background: #40C4FF !important;
+}
+
+.leave_type_color_3 {
+  background: #FF5722 !important;
+}
+
+.leave_type_color_4 {
+  background: #FF80AB !important;
+}
+
+.leave_type_color_5 {
+  background: #00BCD4 !important;
+}
